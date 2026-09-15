@@ -1,0 +1,8 @@
+{
+  "name": "satupintu.id",
+  "description": "Custom ERP Software House - Sistem Manajemen Bisnis Terintegrasi (Marketing, Keuangan, Produksi, SDM) & Client Portal",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

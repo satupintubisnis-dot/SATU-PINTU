@@ -1,38 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TrendingUp,
-  Target,
   Settings,
   Users,
   Check,
-  Building2,
-  Building,
-  Store,
-  Compass,
   ArrowRight,
-  LogIn,
-  Linkedin,
-  Instagram,
-  Facebook,
-  Youtube,
-  Phone,
-  Mail,
-  MapPin,
-  Sparkles,
-  PieChart as PieIcon,
+  User,
+  Play,
   BarChart3,
-  Calendar,
   Layers,
   FileText,
   Clock,
   ShieldCheck,
-  CheckCircle2,
   Menu,
-  X
+  X,
+  Database,
+  GitBranch,
+  AlertCircle,
+  FileSpreadsheet,
+  Target,
+  Search,
+  Linkedin,
+  Instagram,
+  Facebook,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  CheckCircle2
 } from 'lucide-react';
 import { ERPModuleKey } from '../types';
 
-interface HomePageProps {
+export interface HomePageProps {
   onOpenLogin: () => void;
   onOpenSchema?: () => void;
   onScrollToDemo: () => void;
@@ -45,26 +44,22 @@ export const HomePage: React.FC<HomePageProps> = ({
   onScrollToDemo,
   onSelectModule,
 }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-['Plus_Jakarta_Sans',sans-serif] selection:bg-blue-600 selection:text-white flex flex-col">
-      
       {/* ========================================================= */}
-      {/* 1. HEADER / NAVBAR (Pixel-Perfect Nav)                    */}
+      {/* 1. NAVBAR                                                 */}
       {/* ========================================================= */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <a href="#" className="flex items-center gap-1 text-2xl font-extrabold tracking-tight text-slate-900">
-              <span>satupintu</span>
-              <span className="text-[#1B6EF3]">.id</span>
-            </a>
-          </div>
+          <a href="#" className="flex items-center text-2xl font-extrabold tracking-tight text-slate-900">
+            <span>satupintu</span>
+            <span className="text-[#1B6EF3]">.id</span>
+          </a>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Menu */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             <a href="#beranda" className="text-slate-900 font-semibold hover:text-[#1B6EF3] transition-colors">
               Beranda
@@ -86,82 +81,61 @@ export const HomePage: React.FC<HomePageProps> = ({
             </a>
           </nav>
 
-          {/* Right Action Button */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right Login Button */}
+          <div className="hidden md:flex items-center">
             <button
-              id="btn-login-header"
+              id="btn-nav-login"
               onClick={onOpenLogin}
-              className="px-6 py-2.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-all active:scale-95"
+              className="px-5 py-2.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white text-sm font-semibold shadow-sm transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
             >
-              Login Klien
+              <User className="w-4 h-4 fill-white/20" />
+              <span>Login Klien</span>
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50"
+            className="md:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 cursor-pointer"
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 animate-in slide-in-from-top-2 duration-200">
+          <div className="md:hidden bg-white border-b border-slate-100 px-6 py-5 space-y-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col space-y-3 text-sm font-medium text-slate-700">
-              <a
-                href="#beranda"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 text-slate-900 font-semibold"
-              >
+              <a href="#beranda" onClick={() => setMobileMenuOpen(false)} className="py-1 text-slate-900 font-semibold">
                 Beranda
               </a>
-              <a
-                href="#layanan"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[#1B6EF3]"
-              >
+              <a href="#layanan" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-[#1B6EF3]">
                 Layanan
               </a>
-              <a
-                href="#fitur"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[#1B6EF3]"
-              >
+              <a href="#fitur" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-[#1B6EF3]">
                 Fitur
               </a>
-              <a
-                href="#keunggulan"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[#1B6EF3]"
-              >
+              <a href="#keunggulan" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-[#1B6EF3]">
                 Keunggulan
               </a>
-              <a
-                href="#tentang-kami"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[#1B6EF3]"
-              >
+              <a href="#tentang-kami" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-[#1B6EF3]">
                 Tentang Kami
               </a>
-              <a
-                href="#kontak"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-1 hover:text-[#1B6EF3]"
-              >
+              <a href="#kontak" onClick={() => setMobileMenuOpen(false)} className="py-1 hover:text-[#1B6EF3]">
                 Kontak
               </a>
             </nav>
-            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+            <div className="pt-2 border-t border-slate-100">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenLogin();
                 }}
-                className="w-full py-3 rounded-lg bg-[#1B6EF3] text-white text-sm font-semibold text-center shadow-sm"
+                className="w-full py-3 rounded-lg bg-[#1B6EF3] text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
               >
-                Login Klien
+                <User className="w-4 h-4" />
+                <span>Login Klien</span>
               </button>
             </div>
           </div>
@@ -169,188 +143,464 @@ export const HomePage: React.FC<HomePageProps> = ({
       </header>
 
       {/* ========================================================= */}
-      {/* 2. HERO SECTION (High Precision 2-Column with Laptop Mockup)*/}
+      {/* 2. HERO SECTION                                           */}
       {/* ========================================================= */}
-      <section id="beranda" className="relative pt-12 pb-20 lg:pt-16 lg:pb-28 overflow-hidden">
-        
-        {/* Subtle Background Dot Patterns */}
-        <div className="absolute top-10 right-10 w-64 h-64 opacity-25 pointer-events-none bg-[radial-gradient(#1B6EF3_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-        <div className="absolute bottom-10 left-10 w-72 h-72 opacity-20 pointer-events-none bg-[radial-gradient(#94a3b8_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section id="beranda" className="relative pt-12 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-blue-50/40 via-white to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             
-            {/* Left Column: Text & CTAs */}
-            <div className="lg:col-span-5 space-y-6 text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                Manajemen Bisnis Terintegrasi dalam Satu Pintu Gerbang
+            {/* Left Column */}
+            <div className="lg:col-span-6 space-y-6 text-left">
+              {/* Badge Pill */}
+              <div className="inline-block">
+                <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[#1B6EF3]">
+                  SATU SISTEM, SEMUA LEBIH MUDAH
+                </span>
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-slate-900 tracking-tight leading-[1.18]">
+                Bisnis Owner Bahagia Melihat Bisnis Berjalan{' '}
+                <span className="text-[#1B6EF3]">Optimal.</span>
               </h1>
 
+              {/* Subtitle */}
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-                satupintu.id adalah solusi software manajemen bisnis terintegrasi untuk mengelola seluruh aspek perusahaan Anda dalam satu platform.
+                Satu pintu Hadir Untuk Optimalisasi Bisnis Jadi Lebih Baik.
               </p>
 
-              {/* 2 Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              {/* 3 Feature Badges */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="flex items-center gap-2.5 p-2 rounded-xl bg-blue-50/70 border border-blue-100/60">
+                  <div className="w-8 h-8 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <Settings className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold text-slate-700 leading-snug">
+                    Terintegrasi Semua Divisi
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2.5 p-2 rounded-xl bg-blue-50/70 border border-blue-100/60">
+                  <div className="w-8 h-8 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <BarChart3 className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold text-slate-700 leading-snug">
+                    Data Real-time dan Akurat
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2.5 p-2 rounded-xl bg-blue-50/70 border border-blue-100/60">
+                  <div className="w-8 h-8 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold text-slate-700 leading-snug">
+                    Aman & Terpercaya
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-4">
                 <button
-                  id="btn-hero-layanan"
-                  onClick={() => {
-                    const el = document.getElementById('layanan');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="px-7 py-3.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white font-semibold text-sm sm:text-base shadow-md shadow-blue-500/20 transition-all active:scale-95"
+                  id="btn-hero-mulai"
+                  onClick={onScrollToDemo}
+                  className="px-7 py-3.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-blue-500/25 transition-all flex items-center gap-2.5 active:scale-95 cursor-pointer"
                 >
-                  Jelajahi Layanan
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Mulai Sekarang</span>
                 </button>
 
                 <button
-                  id="btn-hero-login"
-                  onClick={onOpenLogin}
-                  className="px-6 py-3.5 rounded-lg bg-white border border-blue-200 hover:border-[#1B6EF3] text-[#1B6EF3] hover:bg-blue-50/50 font-semibold text-sm sm:text-base shadow-sm transition-all flex items-center gap-2 active:scale-95"
+                  id="btn-hero-video"
+                  onClick={onOpenSchema}
+                  className="px-6 py-3.5 rounded-lg bg-blue-50 hover:bg-blue-100/80 text-[#1B6EF3] border border-blue-200/80 font-semibold text-sm sm:text-base transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
                 >
-                  <LogIn className="w-4 h-4 text-[#1B6EF3]" />
-                  <span>Login Klien</span>
+                  <Play className="w-4 h-4 fill-[#1B6EF3]" />
+                  <span>Lihat Video</span>
                 </button>
               </div>
             </div>
 
-            {/* Right Column: High-Fidelity Laptop Mockup */}
-            <div className="lg:col-span-7 relative">
-              
-              {/* Laptop Shell Container */}
-              <div className="relative mx-auto max-w-[620px] bg-slate-800 rounded-t-[20px] p-2.5 shadow-2xl border-4 border-slate-700">
+            {/* Right Column: Hero Visual with Happy Business Owners & Floating UI Cards */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative mx-auto max-w-[540px]">
                 
-                {/* Laptop Camera dot */}
-                <div className="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-600 mx-auto mb-2" />
-
-                {/* Laptop Screen Content (ERP Dashboard) */}
-                <div className="bg-[#F8FAFC] rounded-lg overflow-hidden border border-slate-200 text-slate-800 text-xs shadow-inner select-none">
+                {/* Main Photo with soft rounded frame & drop shadow */}
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100 aspect-[4/3.3] sm:aspect-[4/3]">
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80"
+                    alt="Pebisnis Bahagia satupintu.id"
+                    className="w-full h-full object-cover object-top"
+                    referrerPolicy="no-referrer"
+                  />
                   
-                  {/* Dashboard Header Bar */}
-                  <div className="bg-white px-4 py-2.5 border-b border-slate-200 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-extrabold text-sm text-slate-900">
-                        satupintu<span className="text-[#1B6EF3]">.id</span>
-                      </span>
+                  {/* Subtle inner gradient vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Cup & books label badge at desk bottom */}
+                  <div className="absolute bottom-3 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-slate-700 shadow-sm border border-slate-100 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span>BISNIS LEBIH MUDAH</span>
+                  </div>
+                </div>
+
+                {/* Floating Card 1: Top Dashboard Header & Metrics */}
+                <div className="absolute -top-6 -left-4 sm:-left-8 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-slate-100/80 max-w-[280px] sm:max-w-[310px] z-20">
+                  <div className="flex items-center gap-2 pb-2 mb-2 border-b border-slate-100">
+                    <div className="px-2 py-0.5 rounded bg-blue-100 text-[#1B6EF3] text-[9px] font-bold flex items-center gap-1">
+                      <Layers className="w-3 h-3" />
+                      <span>Dashboard</span>
                     </div>
-                    <div className="flex items-center gap-2 text-right">
-                      <div className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center font-bold text-[10px] text-slate-600">
-                        PS
+                    <span className="text-[10px] font-extrabold text-slate-800 ml-auto">
+                      satupintu<span className="text-[#1B6EF3]">.id</span>
+                    </span>
+                  </div>
+
+                  {/* Mini metrics bar */}
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                      <div className="text-[8px] text-slate-500">Total Project</div>
+                      <div className="text-xs sm:text-sm font-extrabold text-slate-800">24</div>
+                    </div>
+                    <div className="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                      <div className="text-[8px] text-slate-500">Proses Berjalan</div>
+                      <div className="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center justify-center gap-0.5">
+                        <TrendingUp className="w-2.5 h-2.5 text-emerald-500" />
+                        <span>120</span>
                       </div>
-                      <div>
-                        <div className="font-bold text-[11px] text-slate-800 leading-tight">PT. Sukses Bersama</div>
-                        <div className="text-[9px] text-slate-500">Admin</div>
-                      </div>
+                    </div>
+                    <div className="bg-blue-50/80 p-1.5 rounded-lg border border-blue-100">
+                      <div className="text-[8px] text-[#1B6EF3]">Efisiensi</div>
+                      <div className="text-xs sm:text-sm font-extrabold text-[#1B6EF3]">+75%</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Card 2: Top Right Growing Business Chart */}
+                <div className="absolute -top-4 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-slate-100/80 z-20 hidden sm:block">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded-full bg-blue-50 text-[#1B6EF3] flex items-center justify-center">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-bold text-slate-800 leading-tight">Bisnis</div>
+                      <div className="text-[8px] text-slate-500">Semakin Bertumbuh</div>
+                    </div>
+                  </div>
+                  {/* Ascending mini bars */}
+                  <div className="flex items-end gap-1.5 h-10 w-24 px-1 pt-1 bg-slate-50 rounded-lg">
+                    <div className="w-2 bg-blue-200 rounded-t h-[30%]" />
+                    <div className="w-2 bg-blue-300 rounded-t h-[45%]" />
+                    <div className="w-2 bg-blue-400 rounded-t h-[60%]" />
+                    <div className="w-2 bg-blue-500 rounded-t h-[80%]" />
+                    <div className="w-2 bg-[#1B6EF3] rounded-t h-[100%]" />
+                  </div>
+                </div>
+
+                {/* Floating Card 3: Bottom Right Trust Seal */}
+                <div className="absolute -bottom-6 -right-2 sm:-right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-slate-100/80 flex items-center gap-3 z-20 max-w-[240px]">
+                  <div className="w-9 h-9 rounded-xl bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">Satu Pintu</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5 leading-snug">
+                      Solusi Manajemen Bisnis Untuk Masa Depan
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* 3. SECTION 2 - TANTANGAN YANG SERING DIALAMI              */}
+      {/* ========================================================= */}
+      <section className="py-20 lg:py-28 bg-[#F8FAFC] border-y border-slate-100 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Problem Copy */}
+            <div className="lg:col-span-5 space-y-5 text-left">
+              <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[#1B6EF3]">
+                TANTANGAN YANG SERING DIALAMI
+              </span>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 tracking-tight leading-[1.2]">
+                Seringkali Bisnis Owner Merasakan Betapa Sulitnya Mengatur Management Bisnis
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                Banyak proses yang harus diawasi, data tersebar di banyak tempat, komunikasi tidak terstruktur, dan sulit mendapatkan laporan yang akurat dan cepat.
+              </p>
+            </div>
+
+            {/* Right Column: Photo of thinking businessman + 6 Problem Badges */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative mx-auto max-w-[560px] flex items-center justify-center py-6">
+                
+                {/* Center Businessman Stressed Photo */}
+                <div className="relative w-[280px] sm:w-[320px] aspect-[4/4.5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200 z-10">
+                  <img
+                    src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80"
+                    alt="Pebisnis Menghadapi Masalah Management"
+                    className="w-full h-full object-cover object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Thought Scribble / Tangled Cloud Above Head */}
+                  <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md p-1.5 rounded-full shadow-md border border-slate-200">
+                    <svg className="w-8 h-8 text-slate-700 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2C7 2 3 5 3 9c0 2.5 1.5 4.5 3.5 5.5-.5 1-1.5 2-3 2.5 2 0 4-1 5-2 1 .5 2.2.8 3.5.8 5 0 9-3 9-7s-4-6.8-9-6.8z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* 6 Floating Problem Badges surrounding the businessman */}
+                
+                {/* 1. Top Left Badge */}
+                <div className="absolute top-0 left-0 sm:-left-4 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[190px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <Database className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Data tersebar di banyak tempat
+                  </span>
+                </div>
+
+                {/* 2. Top Right Badge */}
+                <div className="absolute top-2 right-0 sm:-right-4 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[200px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <GitBranch className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Koordinasi antar divisi tidak terstruktur
+                  </span>
+                </div>
+
+                {/* 3. Middle Left Badge */}
+                <div className="absolute top-1/2 -translate-y-8 -left-2 sm:-left-8 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[190px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <Users className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Sulit memantau kinerja tim
+                  </span>
+                </div>
+
+                {/* 4. Middle Right Badge */}
+                <div className="absolute top-1/2 -translate-y-8 -right-2 sm:-right-8 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[190px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Proses manual memakan waktu
+                  </span>
+                </div>
+
+                {/* 5. Bottom Left Badge */}
+                <div className="absolute bottom-2 left-0 sm:-left-4 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[180px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <FileSpreadsheet className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Laporan tidak real-time
+                  </span>
+                </div>
+
+                {/* 6. Bottom Right Badge */}
+                <div className="absolute bottom-0 right-0 sm:-right-4 bg-white rounded-xl p-2.5 shadow-lg border border-slate-100 flex items-center gap-2 max-w-[210px] z-20">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center shrink-0">
+                    <AlertCircle className="w-4 h-4" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-800 leading-tight">
+                    Pengambilan keputusan sering terlambat
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* 4. SECTION 3 - SOLUSI TERBAIK UNTUK BISNIS ANDA           */}
+      {/* ========================================================= */}
+      <section id="layanan" className="py-20 lg:py-28 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Header Row with Script Tag */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+            <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[#1B6EF3]">
+              SOLUSI TERBAIK UNTUK BISNIS ANDA
+            </span>
+            <span className="text-lg sm:text-xl font-bold italic text-[#1B6EF3] font-serif">
+              Satu Sistem Semua Lebih Mudah
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-[1.2]">
+                Satu Pintu Hadir Membantu Bisnis Owner Untuk Optimalisasi Bisnis dengan Sistem Satu Pintu Terintegrasi
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                <span className="font-semibold text-slate-900">satupintu.id</span> mengintegrasikan seluruh aspek manajemen bisnis dalam <span className="font-semibold text-slate-900">satu</span> platform, sehingga semua proses menjadi lebih mudah, cepat, terstruktur dan efisien.
+              </p>
+
+              {/* 3 Benefit Cards */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
+                  <div className="w-9 h-9 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <Settings className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-bold text-slate-800">
+                    Menyatukan Semua Proses
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
+                  <div className="w-9 h-9 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-bold text-slate-800">
+                    Hemat Waktu dan Biaya
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
+                  <div className="w-9 h-9 rounded-lg bg-[#1B6EF3] text-white flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-bold text-slate-800">
+                    Data Aman dan Terpusat
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-2">
+                <button
+                  id="btn-jelajahi-fitur"
+                  onClick={onScrollToDemo}
+                  className="px-7 py-3.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-blue-500/25 transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Jelajahi Fitur</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Content: Dual Mockup Laptop & Smartphone */}
+            <div className="lg:col-span-7 relative flex items-center justify-center">
+              
+              {/* Laptop Shell */}
+              <div className="relative w-full max-w-[560px] bg-slate-900 rounded-t-[18px] p-2 sm:p-2.5 shadow-2xl border-4 border-slate-800 z-10">
+                <div className="w-2 h-2 rounded-full bg-slate-700 mx-auto mb-1.5" />
+                
+                {/* Laptop Screen */}
+                <div className="bg-[#F8FAFC] rounded-lg overflow-hidden border border-slate-200 text-xs shadow-inner">
+                  
+                  {/* Top Bar */}
+                  <div className="bg-white px-3 py-2 border-b border-slate-200 flex items-center justify-between">
+                    <span className="font-extrabold text-xs text-slate-900">
+                      satupintu<span className="text-[#1B6EF3]">.id</span>
+                    </span>
+                    <div className="flex items-center gap-1.5 text-[9px] text-slate-500">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                      <span>Sistem Aktif</span>
                     </div>
                   </div>
 
-                  {/* Dashboard Layout: Sidebar + Main Content */}
-                  <div className="grid grid-cols-12 min-h-[340px]">
+                  {/* Body Layout */}
+                  <div className="grid grid-cols-12 min-h-[300px]">
                     
-                    {/* Left Sidebar */}
-                    <div className="col-span-3 bg-white border-r border-slate-200 p-2.5 space-y-1 text-[11px]">
-                      <div className="px-2.5 py-1.5 rounded-md bg-[#1B6EF3]/10 text-[#1B6EF3] font-bold flex items-center gap-2">
-                        <Layers className="w-3.5 h-3.5" />
+                    {/* Left Mini Sidebar */}
+                    <div className="col-span-3 bg-white border-r border-slate-200 p-2 space-y-1 text-[10px]">
+                      <div className="px-2 py-1 rounded bg-blue-50 text-[#1B6EF3] font-bold flex items-center gap-1.5">
+                        <Layers className="w-3 h-3" />
                         <span>Dashboard</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <Target className="w-3.5 h-3.5 text-blue-500" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <Target className="w-3 h-3 text-blue-500" />
                         <span>Marketing</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <TrendingUp className="w-3 h-3 text-emerald-500" />
                         <span>Keuangan</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <Settings className="w-3.5 h-3.5 text-amber-500" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <Settings className="w-3 h-3 text-amber-500" />
                         <span>Produksi</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <Users className="w-3.5 h-3.5 text-purple-500" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <Users className="w-3 h-3 text-purple-500" />
                         <span>SDM</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <FileText className="w-3.5 h-3.5 text-slate-400" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <FileText className="w-3 h-3 text-slate-400" />
                         <span>Laporan</span>
                       </div>
-                      <div className="px-2.5 py-1.5 rounded-md text-slate-600 hover:bg-slate-50 font-medium flex items-center gap-2">
-                        <Settings className="w-3.5 h-3.5 text-slate-400" />
+                      <div className="px-2 py-1 text-slate-600 font-medium flex items-center gap-1.5">
+                        <Settings className="w-3 h-3 text-slate-400" />
                         <span>Pengaturan</span>
                       </div>
                     </div>
 
                     {/* Main Content Area */}
-                    <div className="col-span-9 p-3.5 space-y-3 bg-[#F8FAFC]">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-bold text-xs text-slate-900">Dashboard</h4>
+                    <div className="col-span-9 p-3 space-y-2.5 bg-[#F8FAFC]">
+                      {/* Metric Row */}
+                      <div className="grid grid-cols-4 gap-1.5">
+                        <div className="p-1.5 bg-white rounded border border-slate-100 shadow-sm text-center">
+                          <div className="text-[8px] text-slate-500">Total Project</div>
+                          <div className="text-xs font-bold text-slate-800">24</div>
+                        </div>
+                        <div className="p-1.5 bg-white rounded border border-slate-100 shadow-sm text-center">
+                          <div className="text-[8px] text-slate-500">Total Task</div>
+                          <div className="text-xs font-bold text-slate-800">120</div>
+                        </div>
+                        <div className="p-1.5 bg-white rounded border border-slate-100 shadow-sm text-center">
+                          <div className="text-[8px] text-amber-600">Anggaran</div>
+                          <div className="text-[9px] font-bold text-slate-800">250.000.000</div>
+                        </div>
+                        <div className="p-1.5 bg-white rounded border border-slate-100 shadow-sm text-center">
+                          <div className="text-[8px] text-emerald-600">Progress</div>
+                          <div className="text-xs font-bold text-emerald-600">75%</div>
+                        </div>
                       </div>
 
-                      {/* 4 Metric Summary Cards */}
-                      <div className="grid grid-cols-4 gap-2">
-                        
-                        <div className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm">
-                          <div className="text-[9px] text-slate-500">Total Project</div>
-                          <div className="text-sm font-extrabold text-slate-900 mt-0.5">24</div>
-                        </div>
-
-                        <div className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm">
-                          <div className="text-[9px] text-slate-500">Total Task</div>
-                          <div className="text-sm font-extrabold text-slate-900 mt-0.5">120</div>
-                        </div>
-
-                        <div className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm">
-                          <div className="text-[9px] text-amber-500 font-semibold flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                            Anggaran
-                          </div>
-                          <div className="text-[11px] font-bold text-slate-900 mt-0.5">
-                            Rp 250.000.000
-                          </div>
-                        </div>
-
-                        <div className="p-2 bg-white rounded-lg border border-slate-100 shadow-sm">
-                          <div className="text-[9px] text-emerald-600 font-semibold flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                            Progress
-                          </div>
-                          <div className="text-sm font-extrabold text-emerald-600 mt-0.5">75%</div>
-                        </div>
-
-                      </div>
-
-                      {/* Middle Widgets: Line Chart + Aktivitas Terbaru */}
+                      {/* Charts and Activities */}
                       <div className="grid grid-cols-12 gap-2">
-                        
-                        {/* Progress Project Line Chart */}
-                        <div className="col-span-7 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm">
-                          <div className="text-[10px] font-bold text-slate-800 mb-2">Progress Project</div>
-                          
-                          {/* SVG Line Graph */}
-                          <div className="h-28 w-full relative flex items-end">
-                            <svg className="w-full h-full overflow-visible" viewBox="0 0 200 80">
-                              <line x1="0" y1="20" x2="200" y2="20" stroke="#f1f5f9" strokeWidth="1" />
-                              <line x1="0" y1="40" x2="200" y2="40" stroke="#f1f5f9" strokeWidth="1" />
-                              <line x1="0" y1="60" x2="200" y2="60" stroke="#f1f5f9" strokeWidth="1" />
-                              
-                              {/* Blue trend line */}
+                        {/* Line chart */}
+                        <div className="col-span-7 bg-white p-2 rounded border border-slate-100 shadow-sm">
+                          <div className="text-[9px] font-bold text-slate-800 mb-1">Progress Project</div>
+                          <div className="h-20 w-full flex items-end">
+                            <svg className="w-full h-full" viewBox="0 0 160 60">
                               <polyline
                                 fill="none"
                                 stroke="#1B6EF3"
-                                strokeWidth="2.5"
-                                points="10,65 40,55 70,60 100,45 130,30 160,35 190,15"
+                                strokeWidth="2"
+                                points="10,50 35,40 60,45 85,30 110,20 135,25 155,10"
                               />
-                              {/* Circle points */}
-                              <circle cx="10" cy="65" r="3" fill="#1B6EF3" />
-                              <circle cx="40" cy="55" r="3" fill="#1B6EF3" />
-                              <circle cx="70" cy="60" r="3" fill="#1B6EF3" />
-                              <circle cx="100" cy="45" r="3" fill="#1B6EF3" />
-                              <circle cx="130" cy="30" r="3" fill="#1B6EF3" />
-                              <circle cx="160" cy="35" r="3" fill="#1B6EF3" />
-                              <circle cx="190" cy="15" r="3" fill="#1B6EF3" />
+                              <circle cx="10" cy="50" r="2.5" fill="#1B6EF3" />
+                              <circle cx="35" cy="40" r="2.5" fill="#1B6EF3" />
+                              <circle cx="60" cy="45" r="2.5" fill="#1B6EF3" />
+                              <circle cx="85" cy="30" r="2.5" fill="#1B6EF3" />
+                              <circle cx="110" cy="20" r="2.5" fill="#1B6EF3" />
+                              <circle cx="135" cy="25" r="2.5" fill="#1B6EF3" />
+                              <circle cx="155" cy="10" r="2.5" fill="#1B6EF3" />
                             </svg>
                           </div>
-                          
-                          <div className="flex justify-between text-[8px] text-slate-400 mt-1">
+                          <div className="flex justify-between text-[7px] text-slate-400 mt-0.5">
                             <span>Jan</span>
                             <span>Feb</span>
                             <span>Mar</span>
@@ -360,71 +610,115 @@ export const HomePage: React.FC<HomePageProps> = ({
                           </div>
                         </div>
 
-                        {/* Aktivitas Terbaru */}
-                        <div className="col-span-5 bg-white p-2.5 rounded-lg border border-slate-100 shadow-sm space-y-1.5">
-                          <div className="text-[10px] font-bold text-slate-800">Aktivitas Terbaru</div>
-                          
-                          <div className="space-y-1.5 text-[9px]">
-                            <div className="flex items-start justify-between border-b border-slate-50 pb-1">
-                              <div className="flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
-                                <div>
-                                  <div className="font-bold text-slate-800">Meeting Project</div>
-                                  <div className="text-slate-400 text-[8px]">Marketing Campaign</div>
-                                </div>
-                              </div>
-                              <span className="text-slate-400 text-[8px]">2 jam lalu</span>
+                        {/* Recent Activity */}
+                        <div className="col-span-5 bg-white p-2 rounded border border-slate-100 shadow-sm space-y-1">
+                          <div className="text-[9px] font-bold text-slate-800">Aktivitas Terbaru</div>
+                          <div className="space-y-1 text-[8px]">
+                            <div className="flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                              <span className="truncate font-semibold text-slate-700">Meeting Project</span>
                             </div>
-
-                            <div className="flex items-start justify-between border-b border-slate-50 pb-1">
-                              <div className="flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                                <div>
-                                  <div className="font-bold text-slate-800">Pembayaran Invoice</div>
-                                  <div className="text-slate-400 text-[8px]">INV-2024-001</div>
-                                </div>
-                              </div>
-                              <span className="text-slate-400 text-[8px]">5 jam lalu</span>
+                            <div className="flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                              <span className="truncate font-semibold text-slate-700">Pembayaran Inv</span>
                             </div>
-
-                            <div className="flex items-start justify-between border-b border-slate-50 pb-1">
-                              <div className="flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
-                                <div>
-                                  <div className="font-bold text-slate-800">Update Produksi</div>
-                                  <div className="text-slate-400 text-[8px]">Project Website</div>
-                                </div>
-                              </div>
-                              <span className="text-slate-400 text-[8px]">1 hari lalu</span>
+                            <div className="flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                              <span className="truncate font-semibold text-slate-700">Update Produksi</span>
                             </div>
-
-                            <div className="flex items-start justify-between">
-                              <div className="flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0" />
-                                <div>
-                                  <div className="font-bold text-slate-800">Penambahan Karyawan</div>
-                                  <div className="text-slate-400 text-[8px]">Tim Developer</div>
-                                </div>
-                              </div>
-                              <span className="text-slate-400 text-[8px]">2 hari lalu</span>
+                            <div className="flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 shrink-0" />
+                              <span className="truncate font-semibold text-slate-700">Karyawan Baru</span>
                             </div>
                           </div>
-
                         </div>
-
                       </div>
 
                     </div>
-
                   </div>
 
                 </div>
 
+                {/* Laptop Base Bottom Lip */}
+                <div className="h-3 bg-slate-800 rounded-b-[12px] -mx-2 -mb-2 mt-1 flex items-center justify-center">
+                  <div className="w-14 h-1 bg-slate-600 rounded-full" />
+                </div>
               </div>
 
-              {/* Laptop Base Bottom Lip */}
-              <div className="mx-auto max-w-[690px] h-3.5 bg-slate-700 rounded-b-[14px] shadow-2xl relative flex items-center justify-center">
-                <div className="w-16 h-1 bg-slate-500 rounded-full" />
+              {/* Smartphone Mockup positioned in front on the right */}
+              <div className="absolute right-0 sm:-right-4 -bottom-6 w-[150px] sm:w-[170px] bg-slate-900 rounded-[28px] p-2 border-4 border-slate-700 shadow-2xl z-20">
+                {/* Notch */}
+                <div className="w-10 h-2 bg-slate-800 rounded-full mx-auto mb-1.5" />
+                
+                {/* Screen Content */}
+                <div className="bg-white rounded-[20px] p-2.5 space-y-2 text-slate-800 shadow-inner">
+                  {/* App Header */}
+                  <div className="flex items-center justify-between pb-1 border-b border-slate-100">
+                    <span className="text-[10px] font-extrabold text-slate-900">
+                      satupintu<span className="text-[#1B6EF3]">.id</span>
+                    </span>
+                    <Search className="w-3 h-3 text-slate-400" />
+                  </div>
+
+                  {/* Greeting */}
+                  <div>
+                    <div className="text-[9px] text-slate-500">Halo,</div>
+                    <div className="text-[10px] font-bold text-slate-900 leading-tight">Selamat Datang!</div>
+                  </div>
+
+                  {/* 4 App Grid Buttons */}
+                  <div className="grid grid-cols-2 gap-1.5 pt-1">
+                    <button
+                      onClick={() => onSelectModule('marketing')}
+                      className="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-center flex flex-col items-center justify-center cursor-pointer"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center mb-0.5">
+                        <BarChart3 className="w-3 h-3" />
+                      </div>
+                      <span className="text-[8px] font-bold text-slate-800">Marketing</span>
+                    </button>
+
+                    <button
+                      onClick={() => onSelectModule('finance')}
+                      className="p-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-center flex flex-col items-center justify-center cursor-pointer"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center mb-0.5">
+                        <TrendingUp className="w-3 h-3" />
+                      </div>
+                      <span className="text-[8px] font-bold text-slate-800">Keuangan</span>
+                    </button>
+
+                    <button
+                      onClick={() => onSelectModule('production')}
+                      className="p-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 text-center flex flex-col items-center justify-center cursor-pointer"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center mb-0.5">
+                        <Settings className="w-3 h-3" />
+                      </div>
+                      <span className="text-[8px] font-bold text-slate-800">Produksi</span>
+                    </button>
+
+                    <button
+                      onClick={() => onSelectModule('hr')}
+                      className="p-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-center flex flex-col items-center justify-center cursor-pointer"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-purple-500 text-white flex items-center justify-center mb-0.5">
+                        <Users className="w-3 h-3" />
+                      </div>
+                      <span className="text-[8px] font-bold text-slate-800">SDM</span>
+                    </button>
+                  </div>
+
+                  {/* Bottom nav mock */}
+                  <div className="pt-2 border-t border-slate-100 flex justify-between text-[7px] text-slate-400">
+                    <span className="text-[#1B6EF3] font-bold">Dashboard</span>
+                    <span>Laporan</span>
+                    <span>Akun</span>
+                  </div>
+                </div>
+
+                {/* Home Indicator */}
+                <div className="w-8 h-1 bg-slate-600 rounded-full mx-auto mt-1" />
               </div>
 
             </div>
@@ -434,173 +728,119 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ========================================================= */}
-      {/* 3. CLIENT LOGOS SECTION                                   */}
+      {/* 5. SECTION 4 - SEMUA DALAM SATU PLATFORM                  */}
       {/* ========================================================= */}
-      <section className="py-10 border-y border-slate-100 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs sm:text-sm font-medium text-slate-500 mb-8">
-            Dipercaya oleh berbagai perusahaan
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-items-center opacity-65 grayscale hover:grayscale-0 transition-all">
-            
-            {/* Logo 1 */}
-            <div className="flex items-center gap-2 text-slate-800 font-extrabold text-sm tracking-wider">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="9" fill="#64748b" />
-                <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              <span>LOGOIPSUM</span>
-            </div>
-
-            {/* Logo 2 */}
-            <div className="flex items-center gap-2 text-slate-800 font-extrabold text-sm tracking-wider">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <rect x="5" y="5" width="14" height="14" rx="4" fill="#64748b" />
-                <circle cx="12" cy="12" r="3" fill="white" />
-              </svg>
-              <span>logoipsum<sup className="text-[8px] font-normal">&reg;</sup></span>
-            </div>
-
-            {/* Logo 3 */}
-            <div className="flex items-center gap-2 text-slate-800 font-extrabold text-sm tracking-wider">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <polygon points="12,3 21,8 21,16 12,21 3,16 3,8" fill="#64748b" />
-              </svg>
-              <span>LOGOIPSUM</span>
-            </div>
-
-            {/* Logo 4 */}
-            <div className="flex items-center gap-2 text-slate-800 font-extrabold text-sm tracking-wider">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#64748b" strokeWidth="2" fill="none" />
-              </svg>
-              <span>logo-ipsum</span>
-            </div>
-
-            {/* Logo 5 */}
-            <div className="col-span-2 md:col-span-1 flex items-center gap-2 text-slate-800 font-extrabold text-sm tracking-wider">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="12" r="10" stroke="#64748b" strokeWidth="2" fill="none" />
-                <circle cx="12" cy="12" r="5" fill="#64748b" />
-              </svg>
-              <span>LOGOIPSUM</span>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 4. LAYANAN SECTION (4 Cards Grid with Colored Icons)       */}
-      {/* ========================================================= */}
-      <section id="layanan" className="py-20 lg:py-28 bg-[#FAFCFF] relative">
+      <section id="fitur" className="py-20 lg:py-28 bg-[#F8FAFC] border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Section Header */}
+          {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#1B6EF3] mb-2.5">
+            <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[#1B6EF3]">
               SEMUA DALAM SATU PLATFORM
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Kelola Semua Divisi dalam Satu Platform
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2.5">
+              Semua Divisi, Semua Karyawan, Semua Tim Management, Cukup Pakai Satu Sistem
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
-              satupintu.id mengintegrasikan seluruh divisi bisnis Anda untuk efisiensi dan produktivitas yang lebih baik.
+            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              Kelola seluruh divisi perusahaan dalam satu platform terintegrasi dengan akses sesuai peran dan kebutuhan.
             </p>
           </div>
 
-          {/* 4 Clean Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* 4 Vertical Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             {/* Card 1: Marketing (Blue) */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between group">
+            <div className="bg-white rounded-2xl p-7 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
               <div>
-                <div className="w-14 h-14 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center mb-6 shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform">
-                  <Target className="w-7 h-7" />
+                <div className="w-14 h-14 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center mb-6 shadow-md shadow-blue-500/20">
+                  <Settings className="w-7 h-7" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                <h3 className="text-lg font-bold text-slate-900 mb-2.5">
                   Divisi Marketing
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Kelola kampanye, leads, customer, dan analitik marketing dalam satu dashboard terintegrasi.
+                  Kelola prospek, customer dan aktivitas penjualan.
                 </p>
               </div>
 
               <button
+                id="btn-module-marketing"
                 onClick={() => onSelectModule('marketing')}
-                className="mt-6 text-[#1B6EF3] hover:text-blue-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2 transition-all"
+                className="mt-6 w-10 h-10 rounded-full bg-blue-50 hover:bg-[#1B6EF3] text-[#1B6EF3] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                aria-label="Pilih Divisi Marketing"
               >
-                <span>Selengkapnya</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Card 2: Keuangan (Green) */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between group">
+            <div className="bg-white rounded-2xl p-7 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
               <div>
-                <div className="w-14 h-14 rounded-full bg-[#059669] text-white flex items-center justify-center mb-6 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-full bg-[#00B074] text-white flex items-center justify-center mb-6 shadow-md shadow-emerald-500/20">
                   <TrendingUp className="w-7 h-7" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                <h3 className="text-lg font-bold text-slate-900 mb-2.5">
                   Divisi Keuangan
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Kelola arus kas, invoice, laporan keuangan, dan anggaran dengan mudah dan akurat.
+                  Kelola laporan keuangan, tagihan dan pembayaran.
                 </p>
               </div>
 
               <button
+                id="btn-module-finance"
                 onClick={() => onSelectModule('finance')}
-                className="mt-6 text-[#1B6EF3] hover:text-blue-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2 transition-all"
+                className="mt-6 w-10 h-10 rounded-full bg-blue-50 hover:bg-[#1B6EF3] text-[#1B6EF3] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                aria-label="Pilih Divisi Keuangan"
               >
-                <span>Selengkapnya</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Card 3: Produksi (Orange) */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between group">
+            <div className="bg-white rounded-2xl p-7 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
               <div>
-                <div className="w-14 h-14 rounded-full bg-[#EA580C] text-white flex items-center justify-center mb-6 shadow-md shadow-orange-500/20 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-full bg-[#F26522] text-white flex items-center justify-center mb-6 shadow-md shadow-orange-500/20">
                   <Settings className="w-7 h-7" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                <h3 className="text-lg font-bold text-slate-900 mb-2.5">
                   Divisi Produksi
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Pantau produksi, kelola inventori, quality control, dan jadwal produksi secara real-time.
+                  Pantau proyek, stock alat dan operasional.
                 </p>
               </div>
 
               <button
+                id="btn-module-production"
                 onClick={() => onSelectModule('production')}
-                className="mt-6 text-[#1B6EF3] hover:text-blue-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2 transition-all"
+                className="mt-6 w-10 h-10 rounded-full bg-blue-50 hover:bg-[#1B6EF3] text-[#1B6EF3] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                aria-label="Pilih Divisi Produksi"
               >
-                <span>Selengkapnya</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
             {/* Card 4: SDM (Purple) */}
-            <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between group">
+            <div className="bg-white rounded-2xl p-7 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center justify-between">
               <div>
-                <div className="w-14 h-14 rounded-full bg-[#7C3AED] text-white flex items-center justify-center mb-6 shadow-md shadow-purple-500/20 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-full bg-[#7F56D9] text-white flex items-center justify-center mb-6 shadow-md shadow-purple-500/20">
                   <Users className="w-7 h-7" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                <h3 className="text-lg font-bold text-slate-900 mb-2.5">
                   Divisi SDM
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Kelola data karyawan, absensi, penggajian, dan performa tim dalam satu sistem.
+                  Kelola data karyawan, rekrutmen dan pengembangan tim.
                 </p>
               </div>
 
               <button
+                id="btn-module-hr"
                 onClick={() => onSelectModule('hr')}
-                className="mt-6 text-[#1B6EF3] hover:text-blue-700 text-xs sm:text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2 transition-all"
+                className="mt-6 w-10 h-10 rounded-full bg-blue-50 hover:bg-[#1B6EF3] text-[#1B6EF3] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                aria-label="Pilih Divisi SDM"
               >
-                <span>Selengkapnya</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -610,324 +850,139 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ========================================================= */}
-      {/* 5. KEUNGGULAN SECTION (Checklist + Laptop & Phone Mockup)  */}
+      {/* 6. SECTION 5 - HASIL YANG ANDA RASAKAN                     */}
       {/* ========================================================= */}
       <section id="keunggulan" className="py-20 lg:py-28 bg-white relative overflow-hidden">
-        
-        {/* Subtle Background Dot Patterns */}
-        <div className="absolute right-10 top-1/3 w-64 h-64 opacity-20 pointer-events-none bg-[radial-gradient(#1B6EF3_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
             
-            {/* Left Column: 5 Key Points List */}
-            <div className="lg:col-span-5 space-y-6">
-              <div>
-                <div className="text-xs font-bold uppercase tracking-wider text-[#1B6EF3] mb-2.5">
-                  KENAPA MEMILIH SATUPINTU.ID?
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                  Satu Platform, Semua Kendali di Tangan Anda
-                </h2>
-              </div>
+            {/* Left Column */}
+            <div className="lg:col-span-5 space-y-6 text-left">
+              <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-[#1B6EF3]">
+                HASIL YANG ANDA RASAKAN
+              </span>
 
-              <div className="space-y-4 pt-2">
-                
-                {/* Point 1 */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900">
-                      Terintegrasi Penuh
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                      Semua data dan proses bisnis terhubung dalam satu sistem
-                    </p>
-                  </div>
-                </div>
-
-                {/* Point 2 */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900">
-                      Mudah Digunakan
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                      Interface yang intuitif dan mudah dipelajari oleh semua tim
-                    </p>
-                  </div>
-                </div>
-
-                {/* Point 3 */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900">
-                      Keamanan Terjamin
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                      Data perusahaan Anda aman dengan sistem keamanan berlapis
-                    </p>
-                  </div>
-                </div>
-
-                {/* Point 4 */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900">
-                      Akses Real-time
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                      Pantau bisnis Anda kapan saja, di mana saja
-                    </p>
-                  </div>
-                </div>
-
-                {/* Point 5 */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-6 h-6 rounded-full bg-[#1B6EF3] text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm sm:text-base font-bold text-slate-900">
-                      Support Profesional
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                      Tim support kami siap membantu kesuksesan implementasi
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Right Column: Perspective Laptop + Smartphone Mockup */}
-            <div className="lg:col-span-7 relative flex items-center justify-center">
-              
-              {/* Laptop Mockup */}
-              <div className="relative w-full max-w-[540px] bg-slate-800 rounded-t-[18px] p-2 shadow-2xl border-4 border-slate-700 z-10">
-                <div className="w-2 h-2 rounded-full bg-slate-900 mx-auto mb-1.5" />
-                
-                <div className="bg-[#F8FAFC] rounded-lg overflow-hidden border border-slate-200 p-3 min-h-[290px] text-xs">
-                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200">
-                    <span className="font-extrabold text-[11px] text-slate-900">satupintu<span className="text-[#1B6EF3]">.id</span></span>
-                    <span className="text-[9px] text-slate-500">PT. Sukses Bersama</span>
-                  </div>
-
-                  <div className="grid grid-cols-12 gap-2.5">
-                    
-                    {/* Donut Chart Widget */}
-                    <div className="col-span-6 bg-white p-3 rounded-lg border border-slate-100 shadow-sm flex flex-col items-center">
-                      <div className="text-[10px] font-bold text-slate-800 mb-2">Alokasi Anggaran</div>
-                      
-                      {/* CSS Donut Chart */}
-                      <div className="w-20 h-20 rounded-full border-8 border-t-[#1B6EF3] border-r-[#059669] border-b-[#EA580C] border-l-[#7C3AED] flex items-center justify-center my-1">
-                        <span className="text-[10px] font-extrabold text-slate-800">100%</span>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[8px] text-slate-500 mt-1">
-                        <span className="text-[#1B6EF3]">● Mkt: 35%</span>
-                        <span className="text-[#059669]">● Keu: 25%</span>
-                        <span className="text-[#EA580C]">● Prod: 20%</span>
-                        <span className="text-[#7C3AED]">● SDM: 20%</span>
-                      </div>
-                    </div>
-
-                    {/* Bar Chart Widget */}
-                    <div className="col-span-6 bg-white p-3 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
-                      <div className="text-[10px] font-bold text-slate-800">Aktivitas Bulanan</div>
-                      
-                      {/* Bar graph */}
-                      <div className="flex items-end justify-between h-24 pt-2 px-1">
-                        <div className="w-3 bg-blue-200 rounded-t h-[40%]" />
-                        <div className="w-3 bg-blue-300 rounded-t h-[65%]" />
-                        <div className="w-3 bg-[#1B6EF3] rounded-t h-[85%]" />
-                        <div className="w-3 bg-blue-400 rounded-t h-[70%]" />
-                        <div className="w-3 bg-emerald-500 rounded-t h-[95%]" />
-                      </div>
-
-                      <div className="flex justify-between text-[8px] text-slate-400">
-                        <span>P1</span>
-                        <span>P2</span>
-                        <span>P3</span>
-                        <span>P4</span>
-                        <span>P5</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                {/* Laptop Base */}
-                <div className="h-3 bg-slate-700 rounded-b-[12px] -mx-2 -mb-2 mt-1 flex items-center justify-center">
-                  <div className="w-14 h-1 bg-slate-500 rounded-full" />
-                </div>
-              </div>
-
-              {/* Smartphone Mockup positioned in front on the right */}
-              <div className="absolute right-0 -bottom-6 w-[160px] sm:w-[190px] bg-slate-900 rounded-[28px] p-2 border-4 border-slate-700 shadow-2xl z-20">
-                {/* Phone Speaker Notch */}
-                <div className="w-12 h-2.5 bg-slate-800 rounded-full mx-auto mb-1.5" />
-                
-                {/* Phone Screen */}
-                <div className="bg-white rounded-[20px] p-2.5 space-y-2 text-slate-800 text-[9px] shadow-inner">
-                  <div className="flex items-center justify-between font-bold text-[10px] pb-1 border-b border-slate-100">
-                    <span>satupintu.id</span>
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  </div>
-
-                  <div className="p-1.5 rounded-lg bg-blue-50 border border-blue-100">
-                    <div className="text-[8px] text-slate-500">Omzet Bulan Ini</div>
-                    <div className="font-extrabold text-[11px] text-[#1B6EF3]">Rp 450.000.000</div>
-                  </div>
-
-                  <div className="p-1.5 rounded-lg bg-slate-50 border border-slate-100 space-y-1">
-                    <div className="font-bold text-[8px] text-slate-700">Quick Actions</div>
-                    <div className="grid grid-cols-2 gap-1 text-[7px] text-center">
-                      <div className="p-1 rounded bg-white border border-slate-100 font-semibold">Approval</div>
-                      <div className="p-1 rounded bg-white border border-slate-100 font-semibold">Invoice</div>
-                    </div>
-                  </div>
-
-                  <div className="text-[7px] text-center text-slate-400">Mobile Real-Time Sync</div>
-                </div>
-                
-                {/* Home Indicator bar */}
-                <div className="w-10 h-1 bg-slate-600 rounded-full mx-auto mt-1.5" />
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 6. SOLUSI BISNIS SECTION (4 Horizontal Pill/Cards)         */}
-      {/* ========================================================= */}
-      <section id="fitur" className="py-20 lg:py-24 bg-[#FAFCFF] border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-xs font-bold uppercase tracking-wider text-[#1B6EF3] mb-2.5">
-              UNTUK SIAPA SATUPINTU.ID?
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Solusi untuk Berbagai Jenis Bisnis
-            </h2>
-            <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
-              satupintu.id dirancang untuk membantu berbagai jenis dan skala bisnis mengelola operasional mereka dengan lebih efisien.
-            </p>
-          </div>
-
-          {/* 4 Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            {/* Card 1: Startup & SME */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all text-left">
-              <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-4">
-                <Store className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">
-                Startup & SME
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Kelola bisnis berkembang dengan sistem yang scalable
-              </p>
-            </div>
-
-            {/* Card 2: Perusahaan Menengah */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all text-left">
-              <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-4">
-                <Building className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">
-                Perusahaan Menengah
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Tingkatkan efisiensi dan kontrol operasional
-              </p>
-            </div>
-
-            {/* Card 3: Enterprise */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all text-left">
-              <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-4">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">
-                Enterprise
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Solusi enterprise untuk kebutuhan kompleks
-              </p>
-            </div>
-
-            {/* Card 4: Berbagai Industri */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-lg transition-all text-left">
-              <div className="w-10 h-10 rounded-full bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-4">
-                <Compass className="w-5 h-5" />
-              </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">
-                Berbagai Industri
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Fleksibel untuk berbagai sektor industri
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================= */}
-      {/* 7. CTA SECTION (Large Blue Banner with 2 Buttons)         */}
-      {/* ========================================================= */}
-      <section id="tentang-kami" className="py-16 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl sm:rounded-3xl bg-[#1B6EF3] p-8 sm:p-12 lg:p-14 shadow-2xl shadow-blue-500/25 flex flex-col lg:flex-row items-center justify-between gap-8 text-white relative overflow-hidden">
-            
-            {/* Background Decorative Rings */}
-            <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/10 pointer-events-none" />
-            <div className="absolute left-1/2 top-0 w-96 h-96 rounded-full bg-white/5 pointer-events-none blur-2xl" />
-
-            {/* Left Content */}
-            <div className="space-y-3 max-w-2xl relative z-10 text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                Siap Mengelola Bisnis Anda dengan Lebih Baik?
+              <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-900 tracking-tight leading-[1.2]">
+                Optimalisasi Semua Divisi, KPI Real Time, Cepat Melakukan Evaluasi Management
               </h2>
-              <p className="text-sm sm:text-base text-blue-100 leading-relaxed">
-                Bergabunglah dengan ratusan perusahaan yang telah mempercayakan manajemen bisnis mereka kepada satupintu.id
+
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                Dengan adanya Satu Pintu, pengambilan keputusan bisnis owner jadi lebih tepat, proses lebih efisien, tim lebih produktif, dan <span className="font-semibold text-slate-900">bisnis Anda siap untuk terus meningkat.</span>
               </p>
+
+              <div className="pt-2">
+                <button
+                  id="btn-transformasi-bisnis"
+                  onClick={onScrollToDemo}
+                  className="px-7 py-3.5 rounded-lg bg-[#1B6EF3] hover:bg-blue-700 text-white font-semibold text-sm sm:text-base shadow-lg shadow-blue-500/25 transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                  <span>Mulai Transformasi Bisnis</span>
+                </button>
+              </div>
             </div>
 
-            {/* Right Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 shrink-0 relative z-10">
-              <button
-                id="btn-cta-consult"
-                onClick={onScrollToDemo}
-                className="px-6 sm:px-7 py-3.5 rounded-lg bg-white text-[#1B6EF3] hover:bg-blue-50 font-bold text-sm sm:text-base shadow-lg transition-all active:scale-95 whitespace-nowrap"
-              >
-                Mulai Konsultasi Gratis
-              </button>
+            {/* Right Column: 4 Mini Stat Cards + Growth Graphic Bar Visual */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* 4 Mini Stat Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                {/* Stat 1 */}
+                <div className="bg-white rounded-xl p-4 border border-slate-100 shadow-sm text-left">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-2.5">
+                    <BarChart3 className="w-4 h-4" />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 mb-1">
+                    KPI Real Time
+                  </h4>
+                  <p className="text-[11px] text-slate-500 leading-snug">
+                    Pantau kinerja tim dan pencapaian target secara real-time.
+                  </p>
+                </div>
 
-              <button
-                id="btn-cta-login"
-                onClick={onOpenLogin}
-                className="px-6 sm:px-7 py-3.5 rounded-lg bg-transparent border border-white/80 hover:bg-white/10 text-white font-semibold text-sm sm:text-base transition-all active:scale-95 whitespace-nowrap"
-              >
-                Login Klien
-              </button>
+                {/* Stat 2 */}
+                <div className="bg-white rounded-xl p-4 border border-slate-100 shadow-sm text-left">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-2.5">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 mb-1">
+                    Evaluasi Lebih Cepat
+                  </h4>
+                  <p className="text-[11px] text-slate-500 leading-snug">
+                    Identifikasi masalah dan ambil tindakan lebih cepat.
+                  </p>
+                </div>
+
+                {/* Stat 3 */}
+                <div className="bg-white rounded-xl p-4 border border-slate-100 shadow-sm text-left">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-2.5">
+                    <Target className="w-4 h-4" />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 mb-1">
+                    Keputusan Lebih Tepat
+                  </h4>
+                  <p className="text-[11px] text-slate-500 leading-snug">
+                    Data akurat untuk pengambilan keputusan yang lebih baik.
+                  </p>
+                </div>
+
+                {/* Stat 4 */}
+                <div className="bg-white rounded-xl p-4 border border-slate-100 shadow-sm text-left">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#1B6EF3] flex items-center justify-center mb-2.5">
+                    <TrendingUp className="w-4 h-4" />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-900 mb-1">
+                    Pertumbuhan Bisnis
+                  </h4>
+                  <p className="text-[11px] text-slate-500 leading-snug">
+                    Efisiensi meningkat, profit dan pertumbuhan bisnis lebih tinggi.
+                  </p>
+                </div>
+
+              </div>
+
+              {/* Dynamic Growth Graphic Visual (Ascending blue bars with arrow & floating banner) */}
+              <div className="relative pt-12 pb-6 px-4 sm:px-8 bg-gradient-to-t from-blue-50/50 to-white rounded-3xl border border-blue-100/60 overflow-hidden">
+                
+                {/* Floating Banner */}
+                <div className="relative z-10 mx-auto max-w-sm mb-6 bg-white rounded-full py-2.5 px-6 shadow-md border border-blue-100 text-center">
+                  <span className="text-xs sm:text-sm font-extrabold text-[#1B6EF3]">
+                    Bisnis Anda Siap Naik ke Level Berikutnya!
+                  </span>
+                </div>
+
+                {/* Growth Bars & Arrow Graphic */}
+                <div className="relative h-44 flex items-end justify-between gap-2 sm:gap-3 px-2 sm:px-6">
+                  {/* Ascending Columns */}
+                  <div className="flex-1 bg-blue-100 rounded-t-lg h-[22%]" />
+                  <div className="flex-1 bg-blue-200 rounded-t-lg h-[34%]" />
+                  <div className="flex-1 bg-blue-300 rounded-t-lg h-[46%]" />
+                  <div className="flex-1 bg-blue-400 rounded-t-lg h-[60%]" />
+                  <div className="flex-1 bg-blue-500 rounded-t-lg h-[75%]" />
+                  <div className="flex-1 bg-[#1B6EF3] rounded-t-lg h-[92%]" />
+                  <div className="flex-1 bg-blue-700 rounded-t-lg h-[100%]" />
+
+                  {/* Upward Diagonal Swoosh Arrow */}
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <svg className="w-full h-full overflow-visible" viewBox="0 0 500 160" preserveAspectRatio="none">
+                      <path
+                        d="M 20 140 Q 250 120 470 20"
+                        fill="none"
+                        stroke="#1B6EF3"
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                      />
+                      <polygon
+                        points="460,10 485,15 475,38"
+                        fill="#1B6EF3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
 
           </div>
@@ -935,16 +990,73 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ========================================================= */}
-      {/* 8. FOOTER (Dark Navy / Charcoal Background & Links)       */}
+      {/* 7. FOOTER CTA BANNER                                      */}
+      {/* ========================================================= */}
+      <section id="tentang-kami" className="relative bg-[#1B6EF3] text-white py-16 lg:py-20 overflow-hidden">
+        {/* Architectural City Background Overlay */}
+        <div
+          className="absolute inset-0 opacity-15 mix-blend-overlay bg-cover bg-center pointer-events-none"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&auto=format&fit=crop&q=80')`,
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
+            
+            {/* Left Headline */}
+            <div className="space-y-3 max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                Siap Mengoptimalkan Bisnis Anda Bersama Satu Pintu?
+              </h2>
+              <p className="text-sm sm:text-base text-blue-100 font-normal">
+                Bergabunglah sekarang dan rasakan kemudahan mengelola bisnis dalam satu sistem terintegrasi.
+              </p>
+            </div>
+
+            {/* Right Button & 3 Checkmarks */}
+            <div className="flex flex-col items-center lg:items-end gap-4 shrink-0">
+              <button
+                id="btn-footer-cta-mulai"
+                onClick={onScrollToDemo}
+                className="px-8 py-4 rounded-xl bg-white text-[#1B6EF3] hover:bg-blue-50 font-bold text-base shadow-xl transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
+              >
+                <ArrowRight className="w-5 h-5 text-[#1B6EF3]" />
+                <span>Mulai Sekarang</span>
+              </button>
+
+              {/* 3 Checkmarks underneath */}
+              <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-white/95">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                  <span>Lebih Efisien</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                  <span>Lebih Terstruktur</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                  <span>Lebih Berkembang</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* 8. FOOTER LINKS & COPYRIGHT                               */}
       {/* ========================================================= */}
       <footer id="kontak" className="bg-[#0D131F] text-slate-400 text-sm pt-16 pb-12 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-slate-800">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 pb-12 border-b border-slate-800 text-left">
             
-            {/* Col 1 & 2: Brand, Desc & Socials */}
+            {/* Col 1 & 2: Brand Info & Socials */}
             <div className="lg:col-span-2 space-y-4">
-              <a href="#" className="flex items-center gap-1 text-2xl font-extrabold tracking-tight text-white">
+              <a href="#" className="flex items-center text-2xl font-extrabold tracking-tight text-white">
                 <span>satupintu</span>
                 <span className="text-[#1B6EF3]">.id</span>
               </a>
@@ -960,6 +1072,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#1B6EF3] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
@@ -968,6 +1081,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#1B6EF3] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Instagram"
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
@@ -976,6 +1090,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#1B6EF3] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
@@ -984,6 +1099,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   target="_blank"
                   rel="noreferrer"
                   className="w-9 h-9 rounded-full bg-slate-800 hover:bg-[#1B6EF3] text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                  aria-label="Youtube"
                 >
                   <Youtube className="w-4 h-4" />
                 </a>
@@ -997,22 +1113,22 @@ export const HomePage: React.FC<HomePageProps> = ({
               </h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <button onClick={() => onSelectModule('marketing')} className="hover:text-white transition-colors text-left">
+                  <button onClick={() => onSelectModule('marketing')} className="hover:text-white transition-colors text-left cursor-pointer">
                     Divisi Marketing
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onSelectModule('finance')} className="hover:text-white transition-colors text-left">
+                  <button onClick={() => onSelectModule('finance')} className="hover:text-white transition-colors text-left cursor-pointer">
                     Divisi Keuangan
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onSelectModule('production')} className="hover:text-white transition-colors text-left">
+                  <button onClick={() => onSelectModule('production')} className="hover:text-white transition-colors text-left cursor-pointer">
                     Divisi Produksi
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onSelectModule('hr')} className="hover:text-white transition-colors text-left">
+                  <button onClick={() => onSelectModule('hr')} className="hover:text-white transition-colors text-left cursor-pointer">
                     Divisi SDM
                   </button>
                 </li>
@@ -1036,17 +1152,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </a>
                 </li>
                 <li>
-                  <a href="#karir" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Karir
                   </a>
                 </li>
                 <li>
-                  <a href="#blog" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#partner" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Partner
                   </a>
                 </li>
@@ -1065,27 +1181,27 @@ export const HomePage: React.FC<HomePageProps> = ({
               </h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <a href="#support" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Help Center
                   </a>
                 </li>
                 <li>
-                  <button onClick={onOpenSchema} className="hover:text-white transition-colors text-left">
+                  <button onClick={onOpenSchema} className="hover:text-white transition-colors text-left cursor-pointer">
                     Dokumentasi
                   </button>
                 </li>
                 <li>
-                  <a href="#video-tutorial" className="hover:text-white transition-colors">
+                  <button onClick={onOpenSchema} className="hover:text-white transition-colors text-left cursor-pointer">
                     Video Tutorial
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#syarat" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Syarat & Ketentuan
                   </a>
                 </li>
                 <li>
-                  <a href="#kebijakan-privasi" className="hover:text-white transition-colors">
+                  <a href="#tentang-kami" className="hover:text-white transition-colors">
                     Kebijakan Privasi
                   </a>
                 </li>
